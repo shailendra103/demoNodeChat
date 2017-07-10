@@ -70,8 +70,8 @@ var mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost:27017/fb");
 var nameSchema = new mongoose.Schema({
-    firstName: String,
-    lastName: String
+    id: String,
+    name: String
 });
 var User = mongoose.model("User", nameSchema);
 
@@ -100,9 +100,23 @@ app.get('/auth/facebook',
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   function(req, res) {
-console.log('with callback');
-    console.log(req.user );
-    res.redirect('/chat');
+
+    var newUser = {};
+    newUser.id = req.user.id;
+    newUser.name = req.user.displayName;
+
+    var myData = new User(newUser);
+    console.log(myData);
+    myData.save()
+        .then(item => {
+          console.log('##user saved to database');
+          console.log(item);
+            res.render('chat', { user: item, title: 'Chat' });
+        })
+        .catch(err => {
+            res.status(400).send("Unable to save to database");
+        });
+
   });
 
 app.get('/profile',
@@ -116,24 +130,12 @@ app.get('/profile',
 //     res.sendFile(__dirname + "/index.html");
 // });
 
-// app.post("/addname", (req, res) => {
-//     var myData = new User(req.body);
-//     //console.log(myData);
-//     myData.save()
-//         .then(item => {
-//           console.log('##user saved to database');
-//           //console.log(item);
-//             //res.send("Name saved to database");
-//             res.redirect('/chat');
-//         })
-//         .catch(err => {
-//             res.status(400).send("Unable to save to database");
-//         });
-// });
 
-app.get('/chat', ensureAuthenticated, function(req, res){
-  res.render('chat', { user: req.user, title: 'Chat' });
-});
+// app.get('/chat', ensureAuthenticated, function(req, res){
+//   console.log('calling chat now' );
+//   console.log(req.user );
+//   res.render('chat', { user: req.user, title: 'Chat' });
+// });
 
 io.on('connection', function(client) {
   console.log('Client connected...');

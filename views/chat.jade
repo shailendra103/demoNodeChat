@@ -3,7 +3,7 @@ extend layout
 block content
   form#sendmessage
     input(type="text")#message
-    input(type="hidden", id="name", value="shail")
+    input(type="hidden", id="name", value=user.name)
     button.btn.btn-large#send.btn-danger
       i.icon-bolt
       |  Send
