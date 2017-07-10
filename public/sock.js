@@ -1,4 +1,6 @@
-var socket = io.connect();
+$(function(){
+
+var socket = io.connect('http://localhost:3000');
 
   socket.on('connect', function(data) {
       socket.emit('join', 'Hello server from client');
@@ -17,4 +19,6 @@ socket.on('thread', function(data) {
     socket.emit('messages', message);
     this.reset();
     return false;
+  });
+
   });

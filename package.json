@@ -2,7 +2,7 @@
   "name": "node-demo",
   "version": "1.0.0",
   "description": "Node demo showing how to store data into a MongoDB database",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

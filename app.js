@@ -1,16 +1,24 @@
 var express = require("express");
 var app = express();
 var port = 3000;
-var bodyParser = require('body-parser'),
-  server = require('http').createServer(app),
-  io = require('socket.io').listen(server);
+var bodyParser = require('body-parser');
+//var server = require('http').createServer(app);
+ //var io = require('socket.io').listen(server);
+ //var io = require('socket.io').listen(server);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
+//app.use('/socket.io', express.static(__dirname + '/socket.io'))
 app.set('views', __dirname + '/views');
+//app.use(express.static(__dirname + '/views'));
 app.set('view engine', 'jade');
 
+
+var server = require('http').createServer(app);
+ //var io = require('socket.io').listen(server);
+  var io = require('socket.io')(server);
+ //var io = require('socket.io').listen(server);
 //Mongoose setup
 var mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
@@ -44,18 +52,18 @@ app.get('/chat', ensureAuthenticated, function(req, res){
   res.render('chat', { user: req.user, title: 'Chat' });
 });
 
-  io.on('connection', function(client) {
-    console.log('Client connected...');
+io.on('connection', function(client) {
+  console.log('Client connected...');
 
-    client.on('join', function(data) {
-      console.log(data);
-    });
-
-    client.on('messages', function(data){
-      client.emit('thread', data);
-      client.broadcast.emit('thread', data);
-    });
+  client.on('join', function(data) {
+    console.log(data);
   });
+
+  client.on('messages', function(data){
+    client.emit('thread', data);
+    client.broadcast.emit('thread', data);
+  });
+});
 
 
 function ensureAuthenticated(req, res, next) {
@@ -64,7 +72,11 @@ function ensureAuthenticated(req, res, next) {
   // if (req.isAuthenticated()) { return next(); }
   // res.redirect('/login')
 }
+ //server.listen(1337);
 
-app.listen(port, () => {
+server.listen(port, () => {
     console.log("Server listening on port " + port);
 });
+// app.listen(port, () => {
+//     console.log("Server listening on port " + port);
+// });
