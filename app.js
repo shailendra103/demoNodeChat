@@ -200,7 +200,6 @@ function ensureAuthenticated(req, res, next) {
   // res.redirect('/login')
 }
 
-app.listen(3000);
-// app.listen(port, () => {
-//     console.log("Server listening on port " + port);
-// });
+server.listen(port, () => {
+    console.log("Server listening on port " + port);
+});

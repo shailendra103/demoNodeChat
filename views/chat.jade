@@ -12,7 +12,6 @@ html
     script(src='http://code.jquery.com/jquery.js')
     script(src='/js/bootstrap.min.js')
     script(src='/js/main.js')
-    script(src='/socket.io/socket.io.js')
   body
 
 block content
@@ -23,7 +22,7 @@ block content
     button.btn.btn-large#send.btn-danger
       i.icon-bolt
       |  Send
-
+    script(src='/socket.io/socket.io.js')
     script(src='sock.js')
 
 
