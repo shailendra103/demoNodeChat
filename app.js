@@ -90,6 +90,11 @@ app.get('/login',
     res.render('login');
   });
 
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
 app.get('/account', ensureAuthenticated, function(req, res){
   User.findById(req.session.passport.user, function(err, user) {
     console.log('in account');
