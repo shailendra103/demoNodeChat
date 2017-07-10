@@ -26,12 +26,12 @@ app.get("/", (req, res) => {
 
 app.post("/addname", (req, res) => {
     var myData = new User(req.body);
-    console.log(myData);
+    //console.log(myData);
     myData.save()
         .then(item => {
           console.log('qqqqqq');
           console.log(item);
-            res.send("Name saved to database");
+            //res.send("Name saved to database");
             res.redirect('/chat');
         })
         .catch(err => {
@@ -42,6 +42,20 @@ app.post("/addname", (req, res) => {
 app.get('/chat', ensureAuthenticated, function(req, res){
   res.render('chat', { user: req.user, title: 'Chat' });
 });
+
+  io.on('connection', function(client) {
+    console.log('Client connected...');
+
+    client.on('join', function(data) {
+      console.log(data);
+    });
+
+    client.on('messages', function(data){
+      client.emit('thread', data);
+      client.broadcast.emit('thread', data);
+    });
+  });
+
 
 function ensureAuthenticated(req, res, next) {
   return next();
