@@ -16,8 +16,8 @@ app.set('view engine', 'jade');
 
 
 var server = require('http').createServer(app);
- //var io = require('socket.io').listen(server);
-  var io = require('socket.io')(server);
+var io = require('socket.io').listen(server);
+ // var io = require('socket.io')(server);
  //var io = require('socket.io').listen(server);
 //Mongoose setup
 var mongoose = require("mongoose");
@@ -38,8 +38,8 @@ app.post("/addname", (req, res) => {
     //console.log(myData);
     myData.save()
         .then(item => {
-          console.log('qqqqqq');
-          console.log(item);
+          console.log('##user saved to database');
+          //console.log(item);
             //res.send("Name saved to database");
             res.redirect('/chat');
         })
@@ -72,7 +72,6 @@ function ensureAuthenticated(req, res, next) {
   // if (req.isAuthenticated()) { return next(); }
   // res.redirect('/login')
 }
- //server.listen(1337);
 
 server.listen(port, () => {
     console.log("Server listening on port " + port);
