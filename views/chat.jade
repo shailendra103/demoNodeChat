@@ -7,12 +7,8 @@ block scripts
 block content
   .container-fluid
       .row-fluid
-        .span2
-          h1 Online users
-          ul.nav.nav-stacked.nav-tabs#users
 
         .span10.chat-wrap
-          #thread
           .in-putter.span8
             form#sendmessage
               input(type="text")#message
@@ -20,4 +16,6 @@ block content
               button.btn.btn-large#send.btn-danger
                 i.icon-bolt
                 |  Send
+
+          #thread
           script(src="sock.js")
