@@ -1,14 +1,19 @@
-extend layout
+!!! 5
+html
+  head
+    title= title
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(href='/css/bootstrap.min.css', rel='stylesheet', media='screen')
+  body
+  .container
+    h1 You are logged in.
+    p.lead Say something worthwhile here.
+    a(href="/") Go home
+    br
+    a(href="/ping") Ping
+    br
+    br
+    a(href="/logout") Logout
 
-block content
-  .jumbotron.masthead
-    .container
-      h1= title
-      p You are logged in as #{user.username}
-
-      a(href="/logout").btn.btn-danger
-        i.icon-signout
-        |  Log out!
-      a(href="/chat").btn.btn-danger
-        i.icon-comments-alt
-        |  Back to chat!
+  script(src='http://code.jquery.com/jquery.js')
+  script(src='js/bootstrap.min.js')

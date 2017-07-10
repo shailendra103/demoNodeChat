@@ -1,21 +1,12 @@
 extend layout
 
-block scripts
-  script(src="https://code.jquery.com/jquery-3.1.1.min.js")
-  script(src="/socket.io/socket.io.js")
-
 block content
-  .container-fluid
-      .row-fluid
+  form#sendmessage
+    input(type="text")#message
+    input(type="hidden", id="name", value="shail")
+    button.btn.btn-large#send.btn-danger
+      i.icon-bolt
+      |  Send
 
-        .span10.chat-wrap
-          .in-putter.span8
-            form#sendmessage
-              input(type="text")#message
-              input(type="hidden", id="name", value="shail")
-              button.btn.btn-large#send.btn-danger
-                i.icon-bolt
-                |  Send
-
-          #thread
-          script(src="sock.js")
+#thread
+script(src="sock.js")
