@@ -115,19 +115,10 @@
 
     });
 
-  // app.get('/profile',
-  //   require('connect-ensure-login').ensureLoggedIn(),
-  //   function(req, res){
-  //     res.render('profile', { user: req.user });
-  //   });
-
-
   io.on('connection', function(client) {
     console.log('Client connected...');
 
     client.on('join', function(data) {
-      console.log('somebody joined');
-      console.log(data);
     });
 
     client.on('messages', function(data){
@@ -138,10 +129,8 @@
 
 
   function ensureAuthenticated(req, res, next) {
-    return next();
-    //TODO change it
-    // if (req.isAuthenticated()) { return next(); }
-    // res.redirect('/login')
+    if (req.isAuthenticated()) { return next(); }
+    res.redirect('/login');
   }
 
   server.listen(port, () => {
