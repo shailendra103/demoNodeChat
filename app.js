@@ -6,7 +6,7 @@
   var Strategy = require('passport-facebook').Strategy;
   var server = require('http').createServer(app);
   var io = require('socket.io').listen(server);
-
+  var config = require('./config/oauth.js');
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(express.static('public'));
@@ -23,9 +23,9 @@
 
   // Configure the Facebook strategy for use by Passport.
   passport.use(new Strategy({
-      clientID: '500464776961653',
-      clientSecret: '3259e9a43457a53b2713b854cf5587ac',
-      callbackURL: 'http://localhost:3000/auth/facebook/callback',
+      clientID: config.facebook.clientID,
+      clientSecret: config.facebook.clientSecret,
+      callbackURL: config.facebook.callbackURL,
       profileFields: ['id', 'displayName', 'emails', 'photos'],
     },
     function(accessToken, refreshToken, profile, cb) {
