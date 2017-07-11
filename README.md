@@ -2,4 +2,5 @@
 
 Steps to run:
 1. npm install
-2. Access the app at http://localhost:3000/
+2. node app
+3. Access the app at http://localhost:3000/
