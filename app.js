@@ -95,13 +95,11 @@ app.get('/logout', function(req, res){
   res.redirect('/');
 });
 
-app.get('/account', ensureAuthenticated, function(req, res){
+app.get('/chat', ensureAuthenticated, function(req, res){
   User.findById(req.session.passport.user, function(err, user) {
-    console.log('in account');
     if(err) {
       console.log(err);  // handle errors
     } else {
-      console.log('in account');
       res.render('chat', { user: user});
     }
   });
@@ -110,16 +108,10 @@ app.get('/account', ensureAuthenticated, function(req, res){
 app.get('/login/facebook',
   passport.authenticate('facebook'));
 
-// app.get('/auth/facebook',
-//   passport.authenticate('facebook', { failureRedirect: '/login' }),
-//   function(req, res) {
-//     console.log('without callback');
-//   });
-
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/account');
+    res.redirect('/chat');
     // var newUser = {};
     // newUser.id = req.user.id;
     // newUser.name = req.user.displayName;

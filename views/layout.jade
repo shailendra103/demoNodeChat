@@ -20,8 +20,7 @@ html
             a(href='#') Chat App
           li
             a(href='/') Home
-          li
-            a(href='/ping') Ping
-          li
-            a(href='/logout') Logout
+          if user
+            li
+              a(href='/logout') Logout
       block content
