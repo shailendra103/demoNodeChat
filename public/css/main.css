@@ -15,8 +15,17 @@
   transition: all 0.4s ease 0s;
 }
 
+#thread {
+  padding: 10px 20px;
+}
+.btn-danger {
+  margin-left:20px;
+}
 #page-content-wrapper {
   width: 100%;
+}
+#sendmessage{
+  padding: 10px 20px;
 }
 
 .sidebar-nav {
