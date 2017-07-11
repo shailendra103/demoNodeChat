@@ -1,3 +1,5 @@
 # simple Chat using Facebook login and storing data in mongodb
 
-After npm install access the app at http://localhost:3000/
+Steps to run:
+1. npm install
+2. Access the app at http://localhost:3000/

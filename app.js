@@ -36,7 +36,6 @@
             if (!err && user !== null) {
               return cb(null, user);
             } else {
-              console.log("creating user ...");
               user = new User({
                 id: profile.id,
                 name: profile.displayName
@@ -45,7 +44,6 @@
                 if(err) {
                   console.log(err);  // handle errors!
                 } else {
-                  console.log("saving user ...");
                   return cb(null, user);
                 }
               });

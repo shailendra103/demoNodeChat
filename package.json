@@ -1,8 +1,7 @@
 {
-  "name": "node-demo",
+  "name": "node-chat-app",
   "version": "1.0.0",
-  "description": "Node demo showing how to store data into a MongoDB database",
-  "main": "index.js",
+  "description": "Node chat app using FB login and MongoDB database",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
