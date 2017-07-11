@@ -67,10 +67,10 @@
   app.use(passport.session());
 
 
-  //Mongoose setup
+  //Mongoose & MongoDB setup
   var mongoose = require("mongoose");
   mongoose.Promise = global.Promise;
-  mongoose.connect("mongodb://localhost:27017/fb");
+  mongoose.connect("mongodb://localhost:27017/Users");
   var nameSchema = new mongoose.Schema({
       id: String,
       name: String
@@ -81,11 +81,6 @@
   app.get('/',
     function(req, res) {
       res.render('index', { user: req.user });
-    });
-
-  app.get('/login',
-    function(req, res){
-      res.render('login');
     });
 
   app.get('/logout', function(req, res){
@@ -107,7 +102,7 @@
     passport.authenticate('facebook'));
 
   app.get('/auth/facebook/callback',
-    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    passport.authenticate('facebook', { failureRedirect: '/' }),
     function(req, res) {
       res.redirect('/chat');
 
@@ -128,7 +123,7 @@
 
   function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) { return next(); }
-    res.redirect('/login');
+    res.redirect('/');
   }
 
   server.listen(port, () => {
