@@ -4,7 +4,7 @@ block content
   #thread
     ul#chatthread
   form#sendmessage
-    input(type="text")#message
+    input(type="text", id="message", placeholder="Type a message...")
     input(type="hidden", id="name", value=user.name)
     button.btn#send.btn-danger
       i.icon-bolt
