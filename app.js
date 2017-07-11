@@ -110,11 +110,11 @@ app.get('/account', ensureAuthenticated, function(req, res){
 app.get('/login/facebook',
   passport.authenticate('facebook'));
 
-app.get('/auth/facebook',
-  passport.authenticate('facebook', { failureRedirect: '/login' }),
-  function(req, res) {
-    console.log('without callback');
-  });
+// app.get('/auth/facebook',
+//   passport.authenticate('facebook', { failureRedirect: '/login' }),
+//   function(req, res) {
+//     console.log('without callback');
+//   });
 
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
@@ -150,6 +150,7 @@ io.on('connection', function(client) {
   console.log('Client connected...');
 
   client.on('join', function(data) {
+    console.log('somebody joined');
     console.log(data);
   });
 
