@@ -18,6 +18,10 @@
 #thread {
   padding: 10px 20px;
 }
+#thread .name {
+  color: #428bca;
+}
+
 .btn-danger {
   margin-left:20px;
 }

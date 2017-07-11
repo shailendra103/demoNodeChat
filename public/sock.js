@@ -7,7 +7,7 @@ socket.on('connect', function(data) {
 
 // listener for 'thread' event, which updates messages
 socket.on('thread', function(data) {
-  $('#thread').append('<li>' + data.name + ' : '+ data.message + '</li>');
+  $('#chatthread').append('<li><span class="name">' + data.name + ' </span>: '+ data.message + '</li>');
 });
 
 // sends message to server, resets & prevents default form action
